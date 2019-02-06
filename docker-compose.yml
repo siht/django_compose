@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile_postgres
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 9877:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: 1234
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_django
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    ports:
+      - 9001:8000
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
