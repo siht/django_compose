@@ -2,7 +2,7 @@
 FROM postgres:latest
 
 ARG PROJECT_DIR=.
-ARG PROJECT_NAME=cotizador_axa
+ARG PROJECT_NAME=put_here_the_name_of_your_dir
 ARG INIT_SQL=$PROJECT_DIR/$PROJECT_NAME/var/sql
 
 # Set work directory
