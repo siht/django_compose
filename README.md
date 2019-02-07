@@ -15,10 +15,10 @@ contains the projects django itself and here is where have been place settings.p
 contains external files that application doesn't need like requirements.txt
 
 ## var
-contains external files that provides data
+contains external files that provides data like a sql directory
 
 # Settings
-you need to change the vars PROJECT_NAME with the name of the main directory that contains the structure mentioned before, thats all.
+you need to change the vars PROJECT_NAME on every dockerfile with the name of the main directory that contains the structure mentioned before, thats all.
 
 # How to run 
 
