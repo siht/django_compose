@@ -5,12 +5,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_postgres
+      args:
+        - PROJECT_NAME=${PROJECT_NAME}
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 9877:5432
     environment:
+      SECRET_KEY: ${SECRET_KEY}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -18,13 +21,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_django
+      args:
+        - PROJECT_NAME=${PROJECT_NAME}
     command: python /code/manage.py runserver 0.0.0.0:8000
     ports:
-      - 9001:8000
+      - ${DJANGO_PORT}:8000
     environment:
-      DEFAULT_PG_USER: ${POSTGRES_USER}
-      DEFAULT_PG_DB: ${POSTGRES_DB}
-      DEFAULT_PG_PASSWORD: ${POSTGRES_PASSWORD}
+      DEFAULT_PG_USER: ${DEFAULT_PG_USER}
+      DEFAULT_PG_DB: ${DEFAULT_PG_DB}
+      DEFAULT_PG_PASSWORD: ${DEFAULT_PG_PASSWORD}
     depends_on:
       - db
 
